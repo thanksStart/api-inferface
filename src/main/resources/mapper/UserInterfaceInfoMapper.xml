@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.start.project.mapper.UserInterfaceInfoMapper">
+
+    <resultMap id="BaseResultMap" type="com.start.apicommon.model.entity.UserInterfaceInfo">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="userId" column="userId" jdbcType="BIGINT"/>
+            <result property="interfaceInfoId" column="interfaceInfoId" jdbcType="BIGINT"/>
+            <result property="totalNumber" column="totalNumber" jdbcType="INTEGER"/>
+            <result property="leftNumber" column="leftNumber" jdbcType="INTEGER"/>
+            <result property="status" column="status" jdbcType="INTEGER"/>
+            <result property="createTime" column="createTime" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="updateTime" jdbcType="TIMESTAMP"/>
+            <result property="isDelete" column="isDelete" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,userId,interfaceInfoId,
+        totalNumber,leftNumber,status,
+        createTime,updateTime,isDelete
+    </sql>
+    <select id="listTopInvokeInterfaceInfo" resultType="com.start.apicommon.model.entity.UserInterfaceInfo">
+        select interfaceInfoId,sum(totalNumber) as totalNumber
+        from user_interface_info
+        group by interfaceInfoId
+        order by totalNumber desc limit #{limit};
+    </select>
+</mapper>

@@ -1,0 +1,8 @@
+server:
+  port: 8520
+  servlet:
+    context-path: /api
+api-client:
+  access-key: start
+  secret-key: a123456
+
